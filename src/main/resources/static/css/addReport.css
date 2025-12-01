@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 30px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+/* ホバー時・フォーカス時に緑枠にする */
+input:hover, input:focus,
+textarea:hover, textarea:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+button, a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+}
+
+button {
+    background-color: #007bff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0069d9;
+}
+
+a {
+    background-color: #6c757d;
+}
+
+a:hover {
+    background-color: #5a6268;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
