@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>日報詳細</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/reportDetail.css}">
+</head>
+
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="detail">
+        <div class="container">
+
+            <h1>日報詳細</h1>
+
+            <div class="detail-item">
+                <label>開始日時</label>
+                <p th:text="${#temporals.format(report.startTime, 'yyyy-MM-dd HH:mm')}"></p>
+            </div>
+
+            <div class="detail-item">
+                <label>終了日時</label>
+                <p th:text="${#temporals.format(report.endTime, 'yyyy-MM-dd HH:mm')}"></p>
+            </div>
+
+            <div class="detail-item">
+                <label>作業時間</label>
+                <p th:text="${report.workDurationStr}"></p>
+            </div>
+
+            <div class="detail-item">
+                <label>作業内容</label>
+                <p th:text="${report.task}"></p>
+            </div>
+
+            <div class="detail-item">
+                <label>次回作業予定</label>
+                <p th:text="${report.nextTask}"></p>
+            </div>
+
+            <div class="detail-item">
+                <label>メモ</label>
+                <p th:text="${report.memo}"></p>
+            </div>
+
+            <div class="button-group">
+                <a class="back-btn" href="/report/list">一覧へ戻る</a>
+                <td>
+                    <a th:href="@{/report/edit/{id}(id=${report.id})}" class="btn edit-btn">
+                        編集
+                    </a>
+                </td>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

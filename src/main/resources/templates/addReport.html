@@ -1,41 +1,51 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <title>日報作成</title>
-    <!-- 外部CSS読み込み -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/addReport.css}">
     <!-- Flatpickr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
+
 <body>
-    <div class="container">
-        <h1>日報作成</h1>
-        <form action="#" method="post">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="contents">
+        <div class="container">
+            <h1>日報作成</h1>
+            <form th:action="@{/report/save}" th:object="${report}" method="post">
 
-            <label>開始日時</label>
-            <input type="text" id="startDate" name="startTime" placeholder="開始日時を選択">
+                <label>開始日時</label>
+                <input type="datetime-local" id="startDate" name="startTime" th:field="*{startTime}"
+                    placeholder="開始日時を選択">
+                <span class="error-text" th:errors="*{startTime}"></span>
 
-            <label>終了日時</label>
-            <input type="text" id="endDate" name="endTime" placeholder="終了日時を選択">
 
-            <label>タイトル</label>
-            <input type="text" name="title" placeholder="例：午前中は会議、午後は開発">
+                <label>終了日時</label>
+                <input type="datetime-local" id="endDate" name="endTime" th:field="*{endTime}" placeholder="終了日時を選択">
+                <span class="error-text" th:errors="*{endTime}"></span>
+                <span class="error-text" th:errors="*{validDateRange}"></span>
 
-            <label>業務内容</label>
-            <textarea name="content" rows="4" placeholder="今日やった作業内容を記入"></textarea>
+                <label>作業内容</label>
+                <textarea name="content" rows="4" th:field="*{task}" placeholder="今日やった作業内容を記入"></textarea>
+                <span class="error-text" th:errors="*{task}"></span>
 
-            <label>課題・問題点</label>
-            <textarea name="issues" rows="2" placeholder="発生した課題や問題点"></textarea>
+                <label>次回作業予定</label>
+                <textarea name="nextTask" rows="2" th:field="*{nextTask}" placeholder="次回の作業予定"></textarea>
+                <span class="error-text" th:errors="*{nextTask}"></span>
 
-            <label>コメント</label>
-            <textarea name="comment" rows="2" placeholder="上司やチームへの補足"></textarea>
+                <label>メモ</label>
+                <textarea name="comment" rows="2" th:field="*{memo}" placeholder="上司やチームへの補足"></textarea>
+                <span class="error-text" th:errors="*{memo}"></span>
 
-            <div class="button-group">
-                <a href="/">キャンセル</a>
-                <button type="submit">送信</button>
-            </div>
-        </form>
+                <div class="button-group">
+                    <a class="cancel-btn" href="/">キャンセル</a>
+                    <button class="submit-btn" type="submit">送信</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- Flatpickr JS -->
@@ -51,4 +61,5 @@
         });
     </script>
 </body>
+
 </html>
