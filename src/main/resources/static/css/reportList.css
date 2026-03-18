@@ -145,11 +145,16 @@ td:first-child {
 .serch-btn {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 15px;
 }
 
 .serch-btn button {
     width: 100px;
+}
+
+.clear-btn {
+    background-color: #ff7259;
 }
 
 .list-contents {

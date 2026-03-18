@@ -1,5 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const clearBtn = document.getElementById('clearBtn');
+    clearBtn.addEventListener('click', function() {
+        document.getElementById('from').value = '';
+        document.getElementById('to').value = '';
+        document.getElementById('keyword').value = '';
+    });
+
     const message = /*[[${message}]]*/ '';
     if (message) {
         alert(message);

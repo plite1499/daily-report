@@ -31,10 +31,11 @@
                     </div>
                     <div class="keyword-wrap">
                         <label>作業内容</label>
-                        <input type="text" name="keyword" th:value="${form.keyword}" placeholder="（例）レイアウト作成">
+                        <input type="text" name="keyword" id="keyword" th:value="${form.keyword}" placeholder="（例）レイアウト作成">
                     </div>
 
                     <div class="serch-btn">
+                        <button type="button" class="clear-btn" id="clearBtn">クリア</button>
                         <button type="submit">検索</button>
                     </div>
                 </div>

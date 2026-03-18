@@ -13,11 +13,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Pageable;
+import com.example.dailyreport.specification.ReportSpecification;
 
 @Controller
 public class ReportController {
@@ -79,7 +83,66 @@ public class ReportController {
     @GetMapping("/report/search")
     public String searchReport(@ModelAttribute ReportSearchForm form, Model model) {
 
-        Page<Report> reportPage = reportService.search(form);
+        Pageable pageable = PageRequest.of(form.getPage(), 100, Sort.by("startTime").descending());
+
+        Page<Report> reportPage;
+
+        String keyword = form.getKeyword();
+        LocalDate from = form.getFrom();
+        LocalDate to = form.getTo();
+        String fromTo = "";
+
+        boolean hasKeyword = keyword != null && !keyword.isEmpty();
+        boolean hasFrom = from != null;
+        boolean hasTo = to != null;
+        boolean hasRange = from != null && to != null;
+
+        if (hasRange) {
+            if (hasKeyword) {
+                reportPage = reportRepository.findByTaskContainingAndStartTimeBetween(keyword, from.atStartOfDay(),
+                        to.atTime(LocalTime.MAX), pageable);
+            } else {
+                reportPage = reportRepository.findByStartTimeBetween(from.atStartOfDay(), to.atTime(LocalTime.MAX),
+                        pageable);
+            }
+        } else if (!hasFrom && !hasTo && !hasKeyword) {
+            reportPage = reportRepository.findAll(pageable);
+        } else {
+
+            LocalDateTime startDateTime  = null;
+            LocalDateTime endDateTime = null;
+
+            if (keyword != null && keyword.isBlank()) {
+                keyword = null;
+            }
+
+            if (hasFrom) {
+                startDateTime = from.atStartOfDay();
+                endDateTime = from.plusDays(1).atStartOfDay();
+                fromTo = "FROM";
+            }
+
+            if (hasTo) {
+                startDateTime = to.atStartOfDay();
+                endDateTime = to.plusDays(1).atStartOfDay();
+                fromTo = "TO";
+            }
+            
+            
+
+            reportPage = reportRepository.findAll(ReportSpecification.search(keyword, startDateTime, endDateTime, fromTo),
+                    pageable);
+        }
+
+        for (Report r : reportPage.getContent()) {
+            if (r.getWorkDuration() != null) {
+                long hours = r.getWorkDuration() / 60 - 1;
+                long minutes = r.getWorkDuration() % 60;
+                r.setWorkDurationStr(hours + "時間 " + minutes + "分");
+            } else {
+                r.setWorkDurationStr("");
+            }
+        }
 
         model.addAttribute("reportPage", reportPage);
         model.addAttribute("reports", reportPage.getContent());

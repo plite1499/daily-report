@@ -12,7 +12,7 @@ import com.example.dailyreport.entity.*;
 
 public class ReportSpecification {
 
-    public static Specification<Report> search(String keyword, LocalDateTime from, LocalDateTime to) {
+    public static Specification<Report> search(String keyword, LocalDateTime startDateTime, LocalDateTime endDateTime, String fromTo) {
         return (root, query, cb) -> {
 
             List<Predicate> predicates = new ArrayList<>();
@@ -21,12 +21,14 @@ public class ReportSpecification {
                 predicates.add(cb.like(root.get("task"), "%" + keyword + "%"));
             }
 
-            if (from != null) {
-                predicates.add(cb.greaterThanOrEqualTo(root.get("startTime"), from));
+            if ("FROM".equals(fromTo)) {
+                predicates.add(cb.greaterThanOrEqualTo(root.get("startTime"), startDateTime));
+                predicates.add(cb.lessThanOrEqualTo(root.get("startTime"), endDateTime));
             }
 
-            if (to != null) {
-                predicates.add(cb.lessThanOrEqualTo(root.get("startTime"), to));
+            if ("TO".equals(fromTo)) {
+                predicates.add(cb.greaterThanOrEqualTo(root.get("endTime"), startDateTime));
+                predicates.add(cb.lessThanOrEqualTo(root.get("endTime"), endDateTime));
             }
 
             query.orderBy(cb.desc(root.get("startTime")));
