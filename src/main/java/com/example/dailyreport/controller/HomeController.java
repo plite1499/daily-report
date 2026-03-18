@@ -8,6 +8,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "home"; // src/main/resources/templates/home.html を表示
+        return "home";
     }
 }
