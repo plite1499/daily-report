@@ -1,11 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>日報参照</title>
+    <title>日報一覧</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/reportList.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script th:src="@{/js/reportList.js}"></script>
 </head>
+
 <body>
-    <h1>日報一覧画面</h1>
-    <!-- 後でテーブルで日報を表示 -->
-    <a href="/">ホームに戻る</a>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container">
+        <h1 class="title">日報一覧</h1>
+        <form method="get" th:action="@{/report/search}">
+            <div class="search-wrap">
+                <div class="search">
+                    <div class="search-date-wrap">
+                        <div class="date-wrap">
+                            <label>開始日時</label>
+                            <input class="search-date" type="date" id="from" name="from" th:value="${form.from}"
+                                placeholder="日時を選択" />
+                        </div>
+                        <div class="date-wrap">
+                            <label>終了日時</label>
+                            <input class="search-date" type="date" id="to" name="to" th:value="${form.to}"
+                                placeholder="日時を選択" />
+                        </div>
+                    </div>
+                    <div class="keyword-wrap">
+                        <label>作業内容</label>
+                        <input type="text" name="keyword" th:value="${form.keyword}" placeholder="（例）レイアウト作成">
+                    </div>
+
+                    <div class="serch-btn">
+                        <button type="submit">検索</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form th:action="@{/report/delete}" method="post" onsubmit="return confirmDelete()">
+
+            <div class="list-contents">
+                <div class="list-wrap">
+                    <div class="top-btn-container">
+                        <a href="/report/add" class="btn add-btn">追加</a>
+                        <button class="btn delete-btn" type="submit">削除</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="checkAll"></th>
+                                    <th>開始</th>
+                                    <th>終了</th>
+                                    <th>作業時間</th>
+                                    <th>作業内容</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="reportTbody">
+
+                                <tr th:each="report : ${reports}" th:onclick="|location.href='/report/${report.id}'|">
+                                    <td class="truncate check">
+                                        <input type="checkbox" name="ids" class="checkItem" th:value="${report.id}"
+                                            onclick="event.stopPropagation()">
+                                    </td>
+                                    <td class="truncate time"
+                                        th:text="${#temporals.format(report.startTime, 'yyyy-MM-dd HH:mm')}"></td>
+                                    <td class="truncate time"
+                                        th:text="${#temporals.format(report.endTime, 'yyyy-MM-dd HH:mm')}"></td>
+                                    <td class="truncate workTime" th:text="${report.workDurationStr}">
+                                    </td>
+                                    <td class="truncate task" th:text="${report.task}" th:title="${report.task}"></td>
+                                </tr>
+
+                                <tr th:if="${#lists.isEmpty(reports)}">
+                                    <td colspan="6">データがありません</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div id="pagination" class="pagination"></div>
+
+                    <div class="btn-container">
+                        <a href="/report/add" class="btn add-btn">追加</a>
+                        <button class="btn delete-btn" type="submit">削除</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
+
+
 </html>
