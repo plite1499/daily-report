@@ -30,6 +30,11 @@ public class ReportController {
         this.reportRepository = reportRepository;
     }
 
+    @GetMapping("/")
+    public String home() {
+        return "home"; 
+    }
+
     // 日報作成画面
     @GetMapping("/report/add")
     public String showAddForm(Model model) {
