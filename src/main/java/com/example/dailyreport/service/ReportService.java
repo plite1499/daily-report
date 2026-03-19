@@ -52,53 +52,56 @@ public class ReportService {
     }
 
     // 検索
-    // public Page<Report> search(ReportSearchForm form) {
+    public Page<Report> search(ReportSearchForm form) {
 
-    //     Pageable pageable = PageRequest.of(form.getPage(), 100, Sort.by("startTime").descending());
+        Pageable pageable = PageRequest.of(form.getPage(), 100, Sort.by("startTime").descending());
 
-    //     String keyword = form.getKeyword();
-    //     LocalDate from = form.getFrom();
-    //     LocalDate to = form.getTo();
+        Page<Report> reportPage;
 
-    //     boolean hasKeyword = keyword != null && !keyword.isEmpty();
-    //     boolean hasFrom = from != null;
-    //     boolean hasTo = to != null;
-    //     boolean hasRange = hasFrom && hasTo;
+        String keyword = form.getKeyword();
+        LocalDate from = form.getFrom();
+        LocalDate to = form.getTo();
+        String fromTo = "";
 
-    //     Page<Report> reportPage;
+        boolean hasKeyword = keyword != null && !keyword.isEmpty();
+        boolean hasFrom = from != null;
+        boolean hasTo = to != null;
+        boolean hasRange = from != null && to != null;
 
-    //     if (hasRange) {
-    //         if (hasKeyword) {
-    //             reportPage = reportRepository.findByTaskContainingAndStartTimeBetween(keyword, from.atStartOfDay(),
-    //                     to.atTime(LocalTime.MAX), pageable);
-    //         } else {
-    //             reportPage = reportRepository.findByStartTimeBetween(from.atStartOfDay(), to.atTime(LocalTime.MAX),
-    //                     pageable);
-    //         }
-    //     } else if (!hasFrom && !hasTo && !hasKeyword) {
-    //         reportPage = reportRepository.findAll(pageable);
-    //     } else {
-    //         if (keyword != null && keyword.isBlank()) {
-    //             keyword = null;
-    //         }
+        if (hasRange) {
+            if (hasKeyword) {
+                reportPage = reportRepository.findByTaskContainingAndStartTimeBetween(keyword, from.atStartOfDay(),
+                        to.atTime(LocalTime.MAX), pageable);
+            } else {
+                reportPage = reportRepository.findByStartTimeBetween(from.atStartOfDay(), to.atTime(LocalTime.MAX),
+                        pageable);
+            }
+        } else if (!hasFrom && !hasTo && !hasKeyword) {
+            reportPage = reportRepository.findAll(pageable);
+        } else {
 
-    //         LocalDateTime fromDateTime = (from != null) ? from.atStartOfDay() : null;
-    //         LocalDateTime toDateTime = (to != null) ? to.atTime(LocalTime.MAX) : null;
+            LocalDateTime startDateTime = null;
+            LocalDateTime endDateTime = null;
 
-    //         reportPage = reportRepository.findAll(ReportSpecification.search(keyword, fromDateTime, toDateTime),
-    //                 pageable);
-    //     }
+            if (keyword != null && keyword.isBlank()) {
+                keyword = null;
+            }
 
-    //     for (Report r : reportPage.getContent()) {
-    //         if (r.getWorkDuration() != null) {
-    //             long hours = r.getWorkDuration() / 60 - 1;
-    //             long minutes = r.getWorkDuration() % 60;
-    //             r.setWorkDurationStr(hours + "時間 " + minutes + "分");
-    //         } else {
-    //             r.setWorkDurationStr("");
-    //         }
-    //     }
+            if (hasFrom) {
+                startDateTime = from.atStartOfDay();
+                endDateTime = from.plusDays(1).atStartOfDay();
+                fromTo = "FROM";
+            }
 
-    //     return reportPage;
-    // }
+            if (hasTo) {
+                startDateTime = to.atStartOfDay();
+                endDateTime = to.plusDays(1).atStartOfDay();
+                fromTo = "TO";
+            }
+
+            reportPage = reportRepository
+                    .findAll(ReportSpecification.search(keyword, startDateTime, endDateTime, fromTo), pageable);
+        }
+        return reportPage;
+    }
 }

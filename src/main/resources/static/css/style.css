@@ -121,14 +121,13 @@ table {
     width: 100%;
     border-collapse: collapse;
     background: white;
-    border: 1px solid #1565c0;
 }
 
-th,
+/* th,
 td {
     padding: 10px 12px;
     border: 1px solid #ddd;
-}
+} */
 
 th {
     background-color: #f4f6f8;
@@ -145,11 +144,11 @@ tr:hover {
 
 /* チェックボックス列 */
 
-th:first-child,
+/* th:first-child,
 td:first-child {
     width: 50px;
     text-align: center;
-}
+} */
 
 /* データなし */
 
@@ -268,9 +267,9 @@ textarea {
         font-size: 12px;
     }
 
-    th, td {
+    /* th, td {
         padding: 8px;
-    }
+    } */
 
     .detail-table th {
         width: 120px;

@@ -25,33 +25,33 @@ public class Report {
     private Integer id;
 
     // 開始時間
-    @NotNull(message = "開始時間は必須です")
+    @NotNull(message = "※開始時間は必須です")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
 
     // 終了時間
-    @NotNull(message = "終了時間は必須です")
+    @NotNull(message = "※終了時間は必須です")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "end_time", nullable = false)
     private LocalDateTime endTime;
 
     // 作業時間
     @Column(name = "work_duration", nullable = false)
-    private Long workDuration; // 作業時間を分単位で保持
+    private Long workDuration; 
 
     // 作業内容
-    @NotBlank(message = "作業内容は必須です")
-    @Size(max = 200, message = "200文字以内で入力してください")
+    @NotBlank(message = "※作業内容は必須です")
+    @Size(max = 200, message = "※200文字以内で入力してください")
     private String task;
 
     // 次回タスク
     @Column(name = "next_task")
-    @Size(max = 200, message = "200文字以内で入力してください")
+    @Size(max = 200, message = "※200文字以内で入力してください")
     private String nextTask;
 
     // メモ
-    @Size(max = 200, message = "200文字以内で入力してください")
+    @Size(max = 200, message = "※200文字以内で入力してください")
     private String memo;
 
     // 作成日時
@@ -62,7 +62,7 @@ public class Report {
     private String workDurationStr;
 
     // 日付チェック
-    @AssertTrue(message = "終了時間は開始時間より後にしてください")
+    @AssertTrue(message = "※終了時間は開始時間より後にしてください")
 
     public boolean isValidDateRange() {
 

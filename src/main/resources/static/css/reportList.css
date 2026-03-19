@@ -14,9 +14,15 @@ label {
     font-weight: bold;
 }
 
+.list-container {
+padding: 15px;
+margin-bottom: 20px;
+background-color: #fff;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+border-radius: 15px;
+}
+
 .table-container {
-    border: 1px solid #66a7f1;
-    margin-bottom: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
@@ -51,7 +57,7 @@ td:first-child {
     text-overflow: ellipsis;
 }
 
-.time {
+/* .time {
     width: 20%;
 }
 
@@ -65,7 +71,7 @@ td:first-child {
 
 .task {
     width: 30%;
-}
+} */
 
 .tooltip-cell {
     position: relative;
@@ -141,6 +147,10 @@ td:first-child {
     gap: 5px;
 }
 
+.date-wrap input{
+    background-color: #fff;
+}
+
 .keyword-wrap {
     display: flex;
     flex-direction: column;
@@ -203,6 +213,30 @@ td:first-child {
     opacity: 1;
 }
 
+.add-btn,
+.delete-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    height: 35px;
+    width: 60px;
+
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.error-text {
+    color: red;
+    font-size: 0.8rem;
+}
+
 @media screen and (max-width: 768px) {
 
     body {
@@ -235,20 +269,20 @@ td:first-child {
 
     th,
     td {
-        padding: 8px;
+        padding: 5px 0;
     }
 
     /* カラム幅調整 */
     .time {
-        width: 120px;
+        width: 100px;
     }
 
     .workTime {
-        width: 120px;
+        width: 80px;
     }
 
     .check {
-        width: 60px;
+        width: 30px;
     }
 
     .task {
@@ -256,9 +290,9 @@ td:first-child {
     }
 
     /* truncate強化 */
-    .truncate {
+    /* .truncate {
         max-width: 120px;
-    }
+    } */
 
     /* tooltip小さく */
     .tooltip-text {
@@ -300,10 +334,11 @@ td:first-child {
         font-size: 12px;
     }
 
-    
-    .add-btn, .delete-btn {
-        text-align: center;
-        padding: 5px 10px;
+
+    .add-btn,
+    .delete-btn {
+        height: 35px;
+        width: 60px;
         font-size: 12px;
     }
 }
