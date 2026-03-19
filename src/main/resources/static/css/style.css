@@ -58,6 +58,7 @@ body {
 .container {
     margin: 40px auto;
     padding: 20px;
+    max-width: 1000px;
 }
 
 /* タイトル */
@@ -214,12 +215,9 @@ textarea {
     margin-top: 2px;
 }
 
-/* =====================
-   レスポンシブ対応
-===================== */
+
 @media screen and (max-width: 768px) {
 
-    /* ヘッダー */
     .site-header .header-container {
         width: 95%;
         flex-direction: column;
@@ -230,12 +228,11 @@ textarea {
     .nav {
         flex-wrap: wrap;
         gap: 10px;
-        font-size: 14px;
+        font-size: 12px;
     }
 
-    /* コンテンツ */
     .container {
-        margin: 80px 10px 20px; /* ヘッダー分余白 */
+        margin: 80px 10px 20px; 
         padding: 10px;
     }
 
@@ -243,14 +240,12 @@ textarea {
         font-size: 20px;
     }
 
-    /* ボタン */
     button, .btn {
         text-align: center;
         padding: 10px;
         font-size: 14px;
     }
 
-    /* フォーム */
     .form-group {
         margin-bottom: 12px;
     }
@@ -260,18 +255,16 @@ textarea {
         font-size: 14px;
     }
 
-    /* カード */
     .card {
         padding: 15px;
     }
 
-    /* テーブル（重要） */
     .table-container {
         overflow-x: auto;
     }
 
     table {
-        min-width: 700px; /* ←これが超重要 */
+        min-width: 700px; 
         font-size: 12px;
     }
 
@@ -279,7 +272,6 @@ textarea {
         padding: 8px;
     }
 
-    /* 詳細テーブル */
     .detail-table th {
         width: 120px;
         font-size: 13px;
@@ -289,7 +281,6 @@ textarea {
         font-size: 13px;
     }
 
-    /* エラー */
     .error {
         font-size: 11px;
     }

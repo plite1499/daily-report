@@ -3,6 +3,7 @@
 
 <head>
     <title>日報更新</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/addReport.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -41,7 +42,7 @@
                 <span class="error-text" th:errors="*{memo}"></span>
 
                 <div class="button-group">
-                    <a class="cancel-btn" href="/report/list">キャンセル</a>
+                    <a class="cancel-btn" th:href="@{/report/{id}(id=${report.id})}">キャンセル</a>
                     <button type="submit">更新</button>
                 </div>
 

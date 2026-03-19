@@ -9,9 +9,15 @@ table {
     color: #fff;
 }
 
+label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .table-container {
     border: 1px solid #66a7f1;
     margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 th,
@@ -120,6 +126,7 @@ td:first-child {
     padding: 20px 50px;
     background-color: #fff;
     border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .search-date-wrap {
@@ -131,11 +138,13 @@ td:first-child {
 .date-wrap {
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
 .keyword-wrap {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 .search input {
@@ -151,10 +160,12 @@ td:first-child {
 
 .serch-btn button {
     width: 100px;
+    font-size: 12px;
 }
 
 .clear-btn {
     background-color: #ff7259;
+    font-size: 12px;
 }
 
 .list-contents {
@@ -202,6 +213,11 @@ td:first-child {
         padding: 0 10px;
     }
 
+    label {
+        font-size: 14px;
+        /* font-weight: bold; */
+    }
+
     /* テーブル */
     table {
         font-size: 12px;
@@ -211,6 +227,10 @@ td:first-child {
 
     .table-container {
         overflow-x: auto;
+    }
+
+    .top-btn-container {
+        margin-bottom: 15px;
     }
 
     th,
@@ -252,8 +272,12 @@ td:first-child {
         width: 90%;
     }
 
+    .search-wrap {
+        padding: 20px 0;
+    }
+
     .search input {
-        width: 80%;
+        padding: 5px;
     }
 
     .search-date-wrap {
@@ -273,6 +297,13 @@ td:first-child {
 
     #pagination button {
         padding: 5px 8px;
+        font-size: 12px;
+    }
+
+    
+    .add-btn, .delete-btn {
+        text-align: center;
+        padding: 5px 10px;
         font-size: 12px;
     }
 }

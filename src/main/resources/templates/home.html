@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Report</title>
     <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
+
 <body>
     <div class="container">
         <h1>日報管理アプリ</h1>
-        <button class="btn btn-add" onclick="location.href='/report/add'">
-            日報を作成
-        </button>
-        <button class="btn btn-list" onclick="location.href='/report/list'">
-            日報を参照
-        </button>
+        <div class="btn-wrap">
+            <button class="btn btn-add" onclick="location.href='/report/add'">
+                日報を作成
+            </button>
+            <button class="btn btn-list" onclick="location.href='/report/list'">
+                日報を参照
+            </button>
+        </div>
     </div>
 </body>
+
 </html>

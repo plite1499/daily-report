@@ -4,12 +4,12 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 500px;
     margin: 80px auto;
     background-color: white;
     padding: 20px 30px;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
@@ -23,7 +23,8 @@ label {
     margin-top: 15px;
 }
 
-input, textarea {
+input,
+textarea {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
@@ -33,13 +34,16 @@ input, textarea {
     transition: border-color 0.2s;
 }
 
-input:hover, input:focus,
-textarea:hover, textarea:focus {
+input:hover,
+input:focus,
+textarea:hover,
+textarea:focus {
     border-color: #28a745;
     outline: none;
 }
 
-button, .cancel-btn {
+button,
+.cancel-btn {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 15px;
@@ -78,4 +82,20 @@ button:hover {
 
 .contents {
     padding: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    label {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    textarea {
+        font-size: 12px;
+    }
+
+    button,
+    .cancel-btn {
+        font-size: 12px;
+    }
 }

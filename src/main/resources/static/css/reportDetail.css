@@ -4,7 +4,7 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 500px;
     margin: 80px auto;
     background-color: white;
     padding: 20px 30px;
@@ -87,4 +87,26 @@ textarea:hover, textarea:focus {
 
 .detail {
     padding: 20px;
+}
+
+@media screen and (max-width: 768px) {
+label {
+    font-size: 14px;
+}
+
+.detail-item p {
+    margin: 0;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.detail-item label {
+    margin-bottom: 0;
+}
+
+.back-btn, .edit-btn {
+    font-size: 12px;
+}
+
+
 }
