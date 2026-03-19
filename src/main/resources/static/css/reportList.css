@@ -148,13 +148,15 @@ td:first-child {
 }
 
 .date-wrap input{
-    background-color: #fff;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .keyword-wrap {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
 }
 
 .search input {

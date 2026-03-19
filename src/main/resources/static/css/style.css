@@ -22,7 +22,7 @@ body {
     margin-bottom: 30px;
 }
 
-.site-header .header-container {
+.header-container {
     max-width: 1200px;
     width: 80%;
     margin: auto;

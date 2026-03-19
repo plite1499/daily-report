@@ -30,7 +30,7 @@
                                 placeholder="日時を選択" />
                         </div>
                     </div>
-                    <div><span class="error-text" th:errors="*{validDateRange}"></span></div>
+                    <span class="error-text" th:errors="*{validDateRange}"></span>
                     <div class="keyword-wrap">
                         <label>作業内容</label>
                         <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="（例）レイアウト作成">
